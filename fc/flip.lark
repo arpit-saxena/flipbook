@@ -1,0 +1,29 @@
+?start : program
+
+program : header* statement*
+
+?header : grid
+grid : "grid" number number ";"
+
+?statement : object ";"
+?object : scene
+        | image
+        | tween
+
+scene : "scene" identifier "{" scene_element ("," scene_element)* ","? "}"
+scene_element : identifier number number
+
+image : "image" identifier path
+
+tween : "tween" identifier identifier "{" frame_desc ("," frame_desc)* ","? "}"
+frame_desc : number number number
+
+identifier : CNAME
+number : SIGNED_NUMBER
+path : ESCAPED_STRING
+
+%import common.CNAME
+%import common.ESCAPED_STRING
+%import common.SIGNED_NUMBER
+%import common.WS
+%ignore WS
