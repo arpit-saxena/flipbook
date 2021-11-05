@@ -51,13 +51,13 @@ class Program:
     def __init__(self) -> None:
         self.objects = []
         self.grid_size = GRID_SIZE
+        self.grid_explicit = False
 
-    def add_header(self, header) -> Program:
-        if type(header) == Program.Grid:
-            self.grid_size = header.size_x, header.size_y
-        else:
-            raise f"Unknown header type {type(header)}"
-
+    def add_grid(self, size_x, size_y) -> Program:
+        if self.grid_explicit:
+            raise RuntimeError("Can't have more than one grid directives!")
+        self.grid_explicit = True
+        self.grid_size = (size_x, size_y)
         return self
 
     def add_object(self, object: Object) -> Program:

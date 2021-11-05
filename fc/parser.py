@@ -16,7 +16,7 @@ class TreeToProgram(Transformer):
 
     def grid(self, tok: Token):
         size_x, size_y = tok
-        self._program.grid_size = (size_x, size_y)
+        self._program.add_grid(size_x, size_y)
         return Discard
 
     def identifier(self, tok: Token):
