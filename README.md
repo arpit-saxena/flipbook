@@ -6,17 +6,17 @@ fc is a compiler for compiling flipbook recipes (written in the flip language) i
 
 To run, we first need to install the required packages. So create a virtual environment, activate it and then run `pip install -r requirements.txt`
 
-Then we can give it a .flip file to compile into a PDF. Some examples are present in the `examples/` folder. For example, we can run `python -m fc examples/newton.flip -o output.pdf` to compiler the recipe `examples/newton.flip` into the flipbook PDF `output.pdf`.
+Then we can give it a .flip file to compile into a PDF. Some examples are present in the `examples/` folder. For example, we can run `python -m fc examples/newton.flip -o output.pdf` to compile the recipe [examples/newton.flip](examples/newton.flip) into the flipbook PDF `output.pdf`.
 
 ## Directory Structure
 
-See `docs/directoryStructure.md` for a detailed description on how the codebase is organised. It is recommended to go through it before diving into reading the code.
+See [docs/directoryStructure.md](docs/directoryStructure.md) for a detailed description on how the codebase is organised. It is recommended to go through it before diving into reading the code.
 
 ## The Flip language
 
 We have a very bare-bones language to describe a flipbook. It currently has 3 primitives to describe what's happening: Image, Tween and Scene. An Image represents an image, a Tween describes movement of some Image/Tween/Scene object and a Scene is a collection of objects with possibly different positions and start/end frames.
 
-For detailed description of the language, see `docs/flipLang.md`
+For detailed description of the language, see [docs/flipLang.md](docs/flipLang.md).
 
 ### Language Support
 
