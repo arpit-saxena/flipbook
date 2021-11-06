@@ -29,7 +29,7 @@ class SymbolTable:
 
     def add_symbol(self, object: ast.Object) -> Union[Image, ast.Object]:
         if object.name in self._symbols:
-            raise SymbolException(f"Redefinition of name {name}")
+            raise SymbolException(f"Redefinition of name {object.name}")
 
         if type(object) == ast.Image:
             object = Image(object, self.config)
