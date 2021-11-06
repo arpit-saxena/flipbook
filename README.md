@@ -2,6 +2,10 @@
 
 fc is a compiler for compiling flipbook recipes (written in the flip language) into a flipbook. Currently only outputting PDF is supported but other output formats can be easily added.
 
+## Time Taken
+
+Overall, I've spent roughly 8-10 hours on the project, spread over many sessions due to the current festive season.
+
 ## How to run
 
 To run, we first need to install the required packages. So create a virtual environment, activate it and then run `pip install -r requirements.txt`
