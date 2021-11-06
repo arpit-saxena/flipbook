@@ -1,0 +1,41 @@
+/*
+ * Simple flipbook recipe showing how the basic elements are combined
+ * It has an initial tween of the apple falling, which is composed with a still
+ * Newton image to make a scene and then that scene is tweened to move along the
+ * x-axis. The resulting effect is that the apple looks like a projectile
+ * falling on Newton's head
+ */
+
+// Each frame will be divided into a grid of this size
+grid 15 15;
+
+// Declare images with their size in terms of how many squares they occupy
+// in the grid
+image newton 4 5 "images/newton.png";
+image apple 1.5 1.5 "images/apple.png";
+
+// Make a tween called appleFall. The object to (motion) tween is apple
+// that has been declared previously
+tween appleFall apple {
+    0   0   13, // List of {frame_num, x, y} where x and y specify the number
+                // of squares in the grid
+    10  0   10,
+    20  0   3.9, // trailing comma's are allowed :)
+};
+
+// Make a scene called newtonApple
+scene newtonApple {
+    newton      0 0, // List of {object_name, x, y} where x and y specify the position
+                     // of the object in terms of number of squares of the grid, with
+                     // origin in the lower left
+    appleFall 1.6 0,
+};
+
+// Make a tween called newtonWalk of the scene newtonApple
+tween newtonWalk newtonApple {
+    0   0   0,
+    20  10  0,   
+};
+
+// We need a main scene which specifies what to render
+scene main { newtonWalk 0 0 };
