@@ -12,7 +12,7 @@ grid : "grid" INT INT ";"
 
 scene : "scene" identifier scene_element_list
 scene_element_list : "{" scene_element ("," scene_element)* ","? "}"
-scene_element : identifier NUMBER NUMBER
+scene_element : [NUMBER NUMBER] identifier NUMBER NUMBER
 
 image : "image" identifier NUMBER NUMBER path
 

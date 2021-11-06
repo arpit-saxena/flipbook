@@ -13,10 +13,12 @@ class Object:
 
 
 class SceneElement:
-    def __init__(self, object_name: str, pos_x: float, pos_y: float) -> None:
+    def __init__(self, object_name: str, pos_x: float, pos_y: float, frame_begin: int, frame_end: int) -> None:
         self.object_name = object_name
         self.pos_x = pos_x
         self.pos_y = pos_y
+        self.frame_begin = frame_begin
+        self.frame_end = frame_end
 
 
 class Scene(Object):

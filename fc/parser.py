@@ -42,8 +42,14 @@ class TreeToProgram(Transformer):
         return Tween(name, obj_name, frame_list)
 
     def scene_element(self, tok: Token):
-        object_name, pos_x, pos_y = tok
-        return SceneElement(object_name, float(pos_x), float(pos_y))
+        if len(tok) == 3:
+            object_name, pos_x, pos_y = tok
+            frame_begin = 0
+            frame_end = -1
+        else:
+            frame_begin, frame_end, object_name, pos_x, pos_y = tok
+
+        return SceneElement(object_name, float(pos_x), float(pos_y), int(frame_begin), int(frame_end))
 
     def scene_element_list(self, tok: List[SceneElement]):
         return tok
