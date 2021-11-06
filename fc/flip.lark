@@ -23,9 +23,15 @@ frame_desc : INT NUMBER NUMBER
 ?identifier : CNAME
 ?path : ESCAPED_STRING
 
+COMMENT :  "/*" /(.|\n|\r)+/ "*/"
+        |  "//" /(.)+/ NEWLINE
+
+%ignore COMMENT
+
 %import common.CNAME
 %import common.ESCAPED_STRING
 %import common.NUMBER
+%import common.NEWLINE
 %import common.INT
 %import common.WS
 %ignore WS
