@@ -49,8 +49,8 @@ class Frame:
 
     def draw(self, canvas: Canvas):
         for image, pos in self.images:
-            canvas.drawImage(
-                image.image_reader, pos[0], pos[1], image.size[0], image.size[1], preserveAspectRatio=True)
+            canvas.drawImage(image.image_reader, pos[0], pos[1], image.size[0],
+                             image.size[1], preserveAspectRatio=True, mask='auto')
 
 
 class FrameBuilder:
