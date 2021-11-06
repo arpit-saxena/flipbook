@@ -6,7 +6,8 @@ from .config import GRID_SIZE
 
 
 class Object:
-    pass
+    def __init__(self, name: str) -> None:
+        self.name = name
 
 
 class SceneElement:
@@ -18,13 +19,13 @@ class SceneElement:
 
 class Scene(Object):
     def __init__(self, name: str, scene_elements: List[SceneElement]) -> None:
-        self.name = name
+        super().__init__(name)
         self.scene_elements = scene_elements
 
 
 class Image(Object):
     def __init__(self, name: str, size_x: int, size_y: int, path: str) -> None:
-        self.name = name
+        super().__init__(name)
         self.size_x = size_x
         self.size_y = size_y
         self.path = path
@@ -40,7 +41,7 @@ class TweenFrameDesc:
 class Tween(Object):
     def __init__(self, name: str, object_name: str,
                  frame_desc_list: List[TweenFrameDesc]) -> None:
-        self.name = name
+        super().__init__(name)
         self.object_name = object_name
         self.frame_desc_list = frame_desc_list
 
