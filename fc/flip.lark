@@ -10,20 +10,22 @@ grid : "grid" number number ";"
         | image
         | tween
 
-scene : "scene" identifier "{" scene_element ("," scene_element)* ","? "}"
+scene : "scene" identifier scene_element_list
+scene_element_list : "{" scene_element ("," scene_element)* ","? "}"
 scene_element : identifier number number
 
-image : "image" identifier path
+image : "image" identifier number number path
 
-tween : "tween" identifier identifier "{" frame_desc ("," frame_desc)* ","? "}"
+tween : "tween" identifier identifier frame_desc_list
+frame_desc_list: "{" frame_desc ("," frame_desc)* ","? "}"
 frame_desc : number number number
 
-identifier : CNAME
-number : SIGNED_NUMBER
-path : ESCAPED_STRING
+?identifier : CNAME
+?number : INT
+?path : ESCAPED_STRING
 
 %import common.CNAME
 %import common.ESCAPED_STRING
-%import common.SIGNED_NUMBER
+%import common.INT
 %import common.WS
 %ignore WS
