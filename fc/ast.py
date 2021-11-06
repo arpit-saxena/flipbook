@@ -13,7 +13,7 @@ class Object:
 
 
 class SceneElement:
-    def __init__(self, object_name: str, pos_x: int, pos_y: int) -> None:
+    def __init__(self, object_name: str, pos_x: float, pos_y: float) -> None:
         self.object_name = object_name
         self.pos_x = pos_x
         self.pos_y = pos_y
@@ -28,7 +28,7 @@ class Scene(Object):
 
 
 class Image(Object):
-    def __init__(self, name: str, size_x: int, size_y: int, path: str) -> None:
+    def __init__(self, name: str, size_x: float, size_y: float, path: str) -> None:
         super().__init__(name)
         self.size_x = size_x
         self.size_y = size_y
@@ -38,7 +38,7 @@ class Image(Object):
 
 
 class TweenFrameDesc:
-    def __init__(self, frame_num: int, pos_x: int, pos_y: int) -> None:
+    def __init__(self, frame_num: int, pos_x: float, pos_y: float) -> None:
         self.frame_num = frame_num
         self.pos_x = pos_x
         self.pos_y = pos_y
@@ -65,7 +65,7 @@ class Program:
         self.grid_size = GRID_SIZE
         self.grid_explicit = False
 
-    def add_grid(self, size_x, size_y) -> Program:
+    def add_grid(self, size_x: int, size_y: int) -> Program:
         if self.grid_explicit:
             raise RuntimeError("Can't have more than one grid directives!")
         self.grid_explicit = True

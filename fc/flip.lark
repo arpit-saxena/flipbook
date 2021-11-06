@@ -3,7 +3,7 @@
 program : header* statement*
 
 ?header : grid
-grid : "grid" number number ";"
+grid : "grid" INT INT ";"
 
 ?statement : object ";"
 ?object : scene
@@ -12,20 +12,20 @@ grid : "grid" number number ";"
 
 scene : "scene" identifier scene_element_list
 scene_element_list : "{" scene_element ("," scene_element)* ","? "}"
-scene_element : identifier number number
+scene_element : identifier NUMBER NUMBER
 
-image : "image" identifier number number path
+image : "image" identifier NUMBER NUMBER path
 
 tween : "tween" identifier identifier frame_desc_list
 frame_desc_list: "{" frame_desc ("," frame_desc)* ","? "}"
-frame_desc : number number number
+frame_desc : INT NUMBER NUMBER
 
 ?identifier : CNAME
-?number : INT
 ?path : ESCAPED_STRING
 
 %import common.CNAME
 %import common.ESCAPED_STRING
+%import common.NUMBER
 %import common.INT
 %import common.WS
 %ignore WS

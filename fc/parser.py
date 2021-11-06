@@ -28,11 +28,11 @@ class TreeToProgram(Transformer):
     def image(self, tok: Token):
         ident, size_x, size_y, path = tok
         path = path[1:-1]
-        return Image(ident, int(size_x), int(size_y), self._base_dir / path)
+        return Image(ident, float(size_x), float(size_y), self._base_dir / path)
 
     def frame_desc(self, tok: Token):
         frame_num, pos_x, pos_y = tok
-        return TweenFrameDesc(int(frame_num), int(pos_x), int(pos_y))
+        return TweenFrameDesc(int(frame_num), float(pos_x), float(pos_y))
 
     def frame_desc_list(self, tok: List[TweenFrameDesc]):
         return tok
@@ -43,7 +43,7 @@ class TreeToProgram(Transformer):
 
     def scene_element(self, tok: Token):
         object_name, pos_x, pos_y = tok
-        return SceneElement(object_name, int(pos_x), int(pos_y))
+        return SceneElement(object_name, float(pos_x), float(pos_y))
 
     def scene_element_list(self, tok: List[SceneElement]):
         return tok
