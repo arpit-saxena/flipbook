@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 from .parser import Parser
 from .pdf.outputter import OutputterPDF
@@ -19,7 +20,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    parser = Parser()
+    parser = Parser(Path(args.input).parents[0])
     with open(args.input, "r") as f:
         program = parser.parse(f)
 

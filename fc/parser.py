@@ -1,3 +1,4 @@
+from pathlib import Path
 from lark import Lark, Transformer
 
 from typing import List, TextIO
@@ -10,9 +11,10 @@ from .ast import Image, Object, Program, SceneElement, Tween, TweenFrameDesc, Sc
 
 
 class TreeToProgram(Transformer):
-    def __init__(self) -> None:
+    def __init__(self, base_dir: Path) -> None:
         super().__init__()
         self._program = Program()
+        self._base_dir = base_dir
 
     def grid(self, tok: Token):
         size_x, size_y = tok
@@ -26,7 +28,7 @@ class TreeToProgram(Transformer):
     def image(self, tok: Token):
         ident, size_x, size_y, path = tok
         path = path[1:-1]
-        return Image(ident, int(size_x), int(size_y), path)
+        return Image(ident, int(size_x), int(size_y), self._base_dir / path)
 
     def frame_desc(self, tok: Token):
         frame_num, pos_x, pos_y = tok
@@ -58,10 +60,10 @@ class TreeToProgram(Transformer):
 
 
 class Parser:
-    def __init__(self) -> None:
+    def __init__(self, base_dir: Path) -> None:
         with open(GRAMMAR_PATH, 'r') as f:
             self.parser = Lark(f.read(), parser='lalr',
-                               transformer=TreeToProgram())
+                               transformer=TreeToProgram(base_dir))
 
     def parse(self, f: TextIO) -> Program:
         return self.parser.parse(f.read())
