@@ -4,6 +4,8 @@ from collections import namedtuple
 from typing import List
 from .config import GRID_SIZE
 
+from sortedcontainers import SortedDict
+
 
 class Object:
     def __init__(self, name: str) -> None:
@@ -22,6 +24,8 @@ class Scene(Object):
         super().__init__(name)
         self.scene_elements = scene_elements
 
+    def get_max_frame_num(self): return 0
+
 
 class Image(Object):
     def __init__(self, name: str, size_x: int, size_y: int, path: str) -> None:
@@ -29,6 +33,8 @@ class Image(Object):
         self.size_x = size_x
         self.size_y = size_y
         self.path = path
+
+    def get_max_frame_num(self): return 0
 
 
 class TweenFrameDesc:
@@ -43,7 +49,12 @@ class Tween(Object):
                  frame_desc_list: List[TweenFrameDesc]) -> None:
         super().__init__(name)
         self.object_name = object_name
-        self.frame_desc_list = frame_desc_list
+        self.frame_desc_list = SortedDict()
+        for frame_desc in frame_desc_list:
+            self.frame_desc_list[frame_desc.frame_num] = frame_desc.pos_x, frame_desc.pos_y
+
+    def get_max_frame_num(self):
+        return self.frame_desc_list.keys()[-1]
 
 
 class Program:
@@ -58,9 +69,12 @@ class Program:
         if self.grid_explicit:
             raise RuntimeError("Can't have more than one grid directives!")
         self.grid_explicit = True
-        self.grid_size = (size_x, size_y)
+        self.grid_size = tuple((size_x, size_y))
         return self
 
     def add_object(self, object: Object) -> Program:
         self.objects.append(object)
         return self
+
+    def get_max_frame_num(self) -> int:
+        return max(obj.get_max_frame_num() for obj in self.objects)
