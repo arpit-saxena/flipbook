@@ -16,22 +16,21 @@ class TreeToProgram(Transformer):
 
     def grid(self, tok: Token):
         size_x, size_y = tok
-        self._program.add_grid(size_x, size_y)
+        self._program.add_grid(int(size_x), int(size_y))
         return Discard
 
     def identifier(self, tok: Token):
         string, = tok
-        print(string)
         return string
 
     def image(self, tok: Token):
         ident, size_x, size_y, path = tok
         path = path[1:-1]
-        return Image(ident, size_x, size_y, path)
+        return Image(ident, int(size_x), int(size_y), path)
 
     def frame_desc(self, tok: Token):
         frame_num, pos_x, pos_y = tok
-        return TweenFrameDesc(frame_num, pos_x, pos_y)
+        return TweenFrameDesc(int(frame_num), int(pos_x), int(pos_y))
 
     def frame_desc_list(self, tok: List[TweenFrameDesc]):
         return tok
@@ -42,7 +41,7 @@ class TreeToProgram(Transformer):
 
     def scene_element(self, tok: Token):
         object_name, pos_x, pos_y = tok
-        return SceneElement(object_name, pos_x, pos_y)
+        return SceneElement(object_name, int(pos_x), int(pos_y))
 
     def scene_element_list(self, tok: List[SceneElement]):
         return tok
